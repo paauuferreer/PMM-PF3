@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/providers/rick_morty_provider.dart';
 import 'package:movies_app/screens/screens.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const AppState());
+
+class AppState extends StatelessWidget {
+  const AppState({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RickMortyProvider(), lazy: false),
+      ],
+      child: const MyApp(),
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Pel·lícules',
-      initialRoute: '/',
+      title: 'Rick & Morty',
+      initialRoute: 'home',
       routes: {
-        '/': (BuildContext context) => HomeScreen(),
-        'details': (BuildContext context) => DetailsScreen(),
+        'home': (BuildContext context) => const HomeScreen(),
+        'details': (BuildContext context) => const DetailsScreen(),
       },
-      theme: ThemeData.light()
-          .copyWith(appBarTheme: const AppBarTheme(backgroundColor: Colors.indigo)),
+      theme: ThemeData.light().copyWith(
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.teal),
+        colorScheme: const ColorScheme.light(primary: Colors.teal),
+      ),
     );
   }
 }

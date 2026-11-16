@@ -65,4 +65,15 @@ class RickMortyProvider extends ChangeNotifier {
     episodisPersonatge[personatge.id] = episodis;
     return episodis;
   }
+
+  Future<List<Character>> cercarPersonatges(String query) async {
+    final url = Uri.https(_baseUrl, '/api/character', {'name': query});
+
+    final resposta = await http.get(url);
+    if (resposta.statusCode == 200) {
+      final characterResponse = CharacterResponse.fromJson(resposta.body);
+      return characterResponse.results;
+    }
+    return [];
+  }
 }

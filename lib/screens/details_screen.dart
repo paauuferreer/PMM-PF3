@@ -18,7 +18,14 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterAndTitle(personatge: personatge),
                 _CharacterInfo(personatge: personatge),
-                CastingCards(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    'Episodis destacats',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                EpisodeCards(personatge: personatge),
               ],
             ),
           ),
